@@ -18,7 +18,10 @@ export interface StudentsStateProps {
   fetchData(page: number): void
 }
 
-export interface SearchStateProps {
+export interface FilterStateProps {
   search: string
+  filterGender: 'male' | 'female' | null
+  handleFilterGender(filterGender: 'male' | 'female'): void
   handleSearch(search: string): void
+  handleCleanFilters(): void
 }

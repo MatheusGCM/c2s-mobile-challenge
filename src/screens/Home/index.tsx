@@ -12,10 +12,10 @@ import {
   ListEmptyComponent,
 } from '@/components'
 import { useBoundStore } from '@/store/use-bound-store'
-import { useSearchStore } from '@/store/use-search-store'
+import { useFilterStore } from '@/store/use-filter-store'
 
 export function Home() {
-  const { search } = useSearchStore()
+  const { search, filterGender } = useFilterStore()
   const {
     students,
     isLoading,
@@ -29,14 +29,19 @@ export function Home() {
   } = useBoundStore()
 
   const hasSearch = !!search
+  const hasFilterGender = filterGender
+
+  const filteredGender = hasFilterGender
+    ? students?.filter((item) => item.gender === filterGender)
+    : students
 
   const filteredData = hasSearch
-    ? students?.filter((item) =>
+    ? filteredGender?.filter((item) =>
         item.name.first
           .toLocaleLowerCase()
           .includes(search.toLocaleLowerCase()),
       )
-    : students
+    : filteredGender
 
   useEffect(() => {
     fetchData(page)
