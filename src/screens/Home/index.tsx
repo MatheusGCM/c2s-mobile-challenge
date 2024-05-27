@@ -36,10 +36,14 @@ export function Home() {
     : students
 
   const filteredData = hasSearch
-    ? filteredGender?.filter((item) =>
-        item.name.first
-          .toLocaleLowerCase()
-          .includes(search.toLocaleLowerCase()),
+    ? filteredGender?.filter(
+        (item) =>
+          item.name.first
+            .toLocaleLowerCase()
+            .includes(search.toLocaleLowerCase()) ||
+          item.name.last
+            .toLocaleLowerCase()
+            .includes(search.toLocaleLowerCase()),
       )
     : filteredGender
 
